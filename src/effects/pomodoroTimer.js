@@ -1,15 +1,12 @@
-export default async function startTimer(time, numberOfBreaks, showMessage, finished) {
-	let pomodoroTimer = 0;
-	while (pomodoroTimer < numberOfBreaks) {
-		await timeout(time);
+export default async function pomodoroTimer(time, numberOfBreaks, showMessage) {
+	let currentNumberOfBreaks = 0;
+	while (currentNumberOfBreaks < numberOfBreaks) {
+		await new Promise((resolve) => setTimeout(resolve, time));
 		console.log('tick');
-		showMessage();
-		pomodoroTimer++;
-	}
-	finished();
-	console.log('done!');
-}
 
-function timeout(ms) {
-	return new Promise((resolve) => setTimeout(resolve, ms));
+		showMessage();
+		currentNumberOfBreaks++;
+	}
+	console.log('done!');
+	return;
 }
