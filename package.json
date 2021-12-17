@@ -22,6 +22,7 @@
   },
   "type": "module",
   "dependencies": {
-    "toastr": "^2.1.4"
+    "toastr": "^2.1.4",
+    "svelte-material-icons": "^1.0.3"
   }
 }

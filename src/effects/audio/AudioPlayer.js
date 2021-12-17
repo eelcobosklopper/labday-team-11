@@ -8,10 +8,14 @@ export class AudioPlayer {
 
         this._buffers = new Map();
         this._context = new AudioContext();
+
+        this._fxSource = this._context.createBufferSource();
+        this._fxSource.connect(this._context.destination);
+
         this._initialized = true;
     }
 
-    async load(key, url) {
+    async load(key = Symbol('fx:key'), url) {
         if (!this._initialized) { throw new Error('AudioPlayer not initialized.'); };
         
         return new Promise((resolve) => {
@@ -24,7 +28,8 @@ export class AudioPlayer {
                     request.response, 
                     (buffer) => {
                         this._buffers.set(key, buffer);
-                        resolve(this._buffers.get(key));
+                        console.log(`Loaded audio buffer on "${key}".`, buffer);
+                        resolve(key);
                     });
             };
             request.send();
@@ -34,9 +39,11 @@ export class AudioPlayer {
     async play(key) {
         if (!this._initialized) { throw new Error('AudioPlayer not initialized!'); };
 
-        const source = this._context.createBufferSource();
-        source.buffer = this._buffers.get(key);
-        source.connect(this._context.destination);
-        source.start(0);
+        if (this._buffers.has(key)) {
+            this._fxSource.buffer = this._buffers.get(key);
+            this._fxSource.start(0);
+        } else {
+            console.warn(`No audio buffer loaded with key "${key}".`);
+        }
     }
 }

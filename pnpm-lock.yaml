@@ -10,9 +10,11 @@ specifiers:
   prettier: ^2.4.1
   prettier-plugin-svelte: ^2.4.0
   svelte: ^3.44.0
+  svelte-material-icons: ^1.0.3
   toastr: ^2.1.4
 
 dependencies:
+  svelte-material-icons: 1.0.3
   toastr: 2.1.4
 
 devDependencies:
@@ -1103,6 +1105,10 @@ packages:
     dependencies:
       svelte: 3.44.3
     dev: true
+
+  /svelte-material-icons/1.0.3:
+    resolution: {integrity: sha512-mlOnpJK3eNDTO9JZXWW67YVL6TtpBLKIbfbQucrBdBQklycejOnZLBD1HOVmIEFcta77jIYFg0wnvO6pmloyhw==}
+    dev: false
 
   /svelte/3.44.3:
     resolution: {integrity: sha512-aGgrNCip5PQFNfq9e9tmm7EYxWLVHoFsEsmKrtOeRD8dmoGDdyTQ+21xd7qgFd8MNdKGSYvg7F9dr+Tc0yDymg==}
