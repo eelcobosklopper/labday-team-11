@@ -1,7 +1,9 @@
 <script>
+	import startTimer from '../effects/pomodoroTimer';
 	import Button from '../components/button.svelte';
 	let visible = false;
 
+	const hello = 'asdfasdf';
 	const cats = [
 		{ id: 'J---aiyznGQ', name: 'Keyboard Cat' },
 		{ id: 'z_AbfPXTKms', name: 'Maru' },
@@ -11,13 +13,21 @@
 	function toggleMe() {
 		visible = !visible;
 	}
+
+	function showMessage() {
+		console.log('take a break!');
+	}
+
+	function finished() {
+		console.log('finished!');
+	}
 </script>
 
 <svelte:head>
 	<title>Homepage</title>
 </svelte:head>
 
-<h1>Welcome to SvelteKit</h1>
+<h1>Welcome to {hello}</h1>
 <p class="green">
 	Visit <a href="https://kit.svelte.dev">kit.svelte.dev</a> to read the documentation
 </p>
@@ -33,6 +43,7 @@
 </ul>
 
 <Button click={toggleMe} text="Click me" />
+<Button click={startTimer(3000, 3, showMessage, finished)} text="Start timer" />
 
 {#if visible}
 	<p>Hello!</p>
