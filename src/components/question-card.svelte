@@ -72,28 +72,28 @@
         transform: scale(1.1);
     }
 
-    .q-card__answer.q-card__answer--a {
+    .q-card__answer.q-card__answer--0 {
         grid-area: a;
         --card-color: hsl(0, 70%, 50%);
         --card-border-color: hsl(0, 100%, 50%);
         --card-shadow-color: hsl(0, 100%, 30%);
     }
 
-    .q-card__answer.q-card__answer--b {
+    .q-card__answer.q-card__answer--1 {
         grid-area: b;
         --card-color: hsl(240, 70%, 50%);
         --card-border-color: hsl(240, 100%, 50%);
         --card-shadow-color: hsl(240, 100%, 30%);
     }
 
-    .q-card__answer.q-card__answer--c {
+    .q-card__answer.q-card__answer--2 {
         grid-area: c;
         --card-color: hsl(128, 70%, 30%);
         --card-border-color: hsl(128, 100%, 30%);
         --card-shadow-color: hsl(128, 100%, 20%);
     }
 
-    .q-card__answer.q-card__answer--d {
+    .q-card__answer.q-card__answer--3 {
         grid-area: d;
         --card-color: hsl(300, 90%, 40%);
         --card-border-color: hsl(300, 100%, 40%);
@@ -107,9 +107,8 @@
     </div>
 
     <div class="q-card__answers">
-        <button class="q-card__answer q-card__answer--a">Answer 1</button>
-        <button class="q-card__answer q-card__answer--b">Answer 2</button>
-        <button class="q-card__answer q-card__answer--c">Answer 3</button>
-        <button class="q-card__answer q-card__answer--d">Answer 4</button>
+        {#each question.answers as answer, i }
+            <button class="q-card__answer q-card__answer--{i}">{ answer }</button>
+        {/each}
     </div>
 </section>
