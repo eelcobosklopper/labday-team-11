@@ -8,6 +8,10 @@ export class AudioPlayer {
 
         this._buffers = new Map();
         this._context = new AudioContext();
+
+        this._fxSource = this._context.createBufferSource();
+        this._fxSource.connect(this._context.destination);
+
         this._initialized = true;
     }
 
@@ -34,9 +38,7 @@ export class AudioPlayer {
     async play(key) {
         if (!this._initialized) { throw new Error('AudioPlayer not initialized!'); };
 
-        const source = this._context.createBufferSource();
-        source.buffer = this._buffers.get(key);
-        source.connect(this._context.destination);
-        source.start(0);
+        this._fxSource.buffer = this._buffers.get(key);
+        this._fxSource.start(0);
     }
 }
