@@ -16,12 +16,14 @@ import { onMount } from 'svelte';
 
 	let showFirst = false;
 	let showThreeOnARow = false;
+	let showGraduation = false;
 
 	onMount(() => {
 		window.addEventListener('keydown', function (e) {
 		if (e.key === 'Escape') {
 			showFirst = false;
 			showThreeOnARow = false;
+			showGraduation= false;
 		}
 	})
 })
@@ -49,6 +51,7 @@ import { onMount } from 'svelte';
 
 <button on:click="{() => showFirst = !showFirst}">First</button>
 <button on:click="{() => showThreeOnARow = !showThreeOnARow}">3 in  row</button>
+<button on:click="{() => showGraduation = !showGraduation}">Graduation</button>
 
 <div class="overlay" class:show="{showFirst}" on:click="{() => showFirst = false}">
 	<div class="pop-up">
@@ -71,6 +74,18 @@ import { onMount } from 'svelte';
 			<p class="margin-top-0">3 op een rij!</p>
 		</div>
 		<button class="btn btn-primary" on:click="{() => showThreeOnARow = false}">Sluiten</button>
+	</div>
+</div>
+
+<div class="overlay" class:show="{showGraduation}" on:click="{() => showGraduation = false}">
+	<div class="pop-up">
+		<div class="margin-bottom-32">
+			<h2>Blijf zo doorgaan!</h2>
+			<img class="img-fluid margin-bottom-32" src="assets/graduation.png" alt="First">
+			<h3 class="subtitle margin-bottom-8">Progressie</h3>
+			<p class="margin-top-0">Je bent een snelle leerling!</p>
+		</div>
+		<button class="btn btn-primary" on:click="{() => showGraduation = false}">Sluiten</button>
 	</div>
 </div>
 
