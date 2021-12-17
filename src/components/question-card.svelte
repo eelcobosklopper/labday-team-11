@@ -1,10 +1,22 @@
 <script>
-    let question = {
-        imgSrc: '/tree.png',
-        answers: ['Boom', 'Maan', 'Roos', 'Vis'],
-        correct: 'Boom'
-    };
+	let question = {
+		imgSrc: '/tree.png',
+		answers: ['Boom', 'Maan', 'Roos', 'Vis'],
+		correct: 'Boom'
+	};
 </script>
+
+<section class="q-card">
+	<div class="q-card__question">
+		<img src={question.imgSrc} alt="What do you see?" />
+	</div>
+
+	<div class="q-card__answers">
+		{#each question.answers as answer, i}
+			<button class="q-card__answer q-card__answer--{i}">{answer}</button>
+		{/each}
+	</div>
+</section>
 
 <style>
     .q-card {
@@ -106,15 +118,3 @@
         --card-shadow-color: hsl(300, 100%, 30%);
     }
 </style>
-
-<section class="q-card">
-    <div class="q-card__question">
-        <img src={question.imgSrc} alt="What do you see?" />
-    </div>
-
-    <div class="q-card__answers">
-        {#each question.answers as answer, i }
-            <button class="q-card__answer q-card__answer--{i}">{ answer }</button>
-        {/each}
-    </div>
-</section>
