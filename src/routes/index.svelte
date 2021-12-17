@@ -1,5 +1,5 @@
 <script>
-	import startTimer from '../effects/pomodoroTimer';
+	import pomodoroTimer from '../effects/pomodoroTimer';
 	import Button from '../components/button.svelte';
 	let visible = false;
 
@@ -12,6 +12,11 @@
 
 	function toggleMe() {
 		visible = !visible;
+	}
+
+	async function startTimer() {
+		await pomodoroTimer(3000, 3, showMessage);
+		finished();
 	}
 
 	function showMessage() {
@@ -43,7 +48,7 @@
 </ul>
 
 <Button click={toggleMe} text="Click me" />
-<Button click={startTimer(3000, 3, showMessage, finished)} text="Start timer" />
+<Button click={startTimer()} text="Start timer" />
 
 {#if visible}
 	<p>Hello!</p>
