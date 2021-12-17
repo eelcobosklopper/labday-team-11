@@ -1,9 +1,25 @@
 <script>
+	import pomodoroTimer from '../effects/pomodoroTimer';
+	import Button from '../components/button.svelte';
+
 	const achievements = [
 		{id: 1, name: 'first', title: 'Goed gedaan!', subTitle: 'Uitdager!', body: 'Je hebt je eerste woord geleerd!', show: false},
 		{id: 2, name: 'threeOnARow', title: 'Goed bezig!', subTitle: 'Wildfire!', body: '3 op een rij!', show: false},
 		{id: 3, name: 'graduation', title: 'Blijf zo doorgaan!', subTitle: 'Progressie!', body: 'Je bent een snelle leerling!', show: false},
 	]
+
+	async function startTimer() {
+		await pomodoroTimer(3000, 3, showMessage);
+		finished();
+	}
+
+	function showMessage() {
+		console.log('take a break!');
+	}
+
+	function finished() {
+		console.log('finished!');
+	}
 </script>
 
 {#each achievements as achievement}
@@ -22,7 +38,11 @@
 </div>
 {/each}
 
+<svelte:head>
+	<title>Homepage</title>
+</svelte:head>
 
+<Button click={startTimer} text="Start timer" />
 <style>
 	body {
 		font-size: 16px;
@@ -39,9 +59,7 @@
 	}
 	.margin-bottom-32 {
 		margin-bottom: 32px;
-	}
-
-	.subtitle {
+	}	.subtitle {
 		font-weight: 200;
 		text-transform: uppercase;
 	}
@@ -104,5 +122,4 @@
 		max-width: 100%;
 		height: auto;
 	}
-
 </style>
