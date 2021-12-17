@@ -50,7 +50,7 @@ import { onMount } from 'svelte';
 <button on:click="{() => showFirst = !showFirst}">First</button>
 <button on:click="{() => showThreeOnARow = !showThreeOnARow}">3 in  row</button>
 
-<div class="overlay" class:show="{showFirst}">
+<div class="overlay" class:show="{showFirst}" on:click="{() => showFirst = false}">
 	<div class="pop-up">
 		<div class="margin-bottom-32">
 			<h2>Goed gedaan!</h2>
@@ -58,11 +58,11 @@ import { onMount } from 'svelte';
 			<h3 class="subtitle margin-bottom-8">Uitdager</h3>
 			<p class="margin-top-0">Je hebt je eerste woord geleerd!</p>
 		</div>
-		<button class="btn btn-primary" on:click="{() => showFirst = !showFirst}">Sluiten</button>
+		<button class="btn btn-primary" on:click="{() => showFirst = false}">Sluiten</button>
 	</div>
 </div>
 
-<div class="overlay" class:show="{showThreeOnARow}">
+<div class="overlay" class:show="{showThreeOnARow}" on:click="{() => showThreeOnARow = false}">
 	<div class="pop-up">
 		<div class="margin-bottom-32">
 			<h2>Goed bezig!</h2>
@@ -70,7 +70,7 @@ import { onMount } from 'svelte';
 			<h3 class="subtitle margin-bottom-8">Wildfire</h3>
 			<p class="margin-top-0">3 op een rij!</p>
 		</div>
-		<button class="btn btn-primary" on:click="{() => showThreeOnARow = !showThreeOnARow}">Sluiten</button>
+		<button class="btn btn-primary" on:click="{() => showThreeOnARow = false}">Sluiten</button>
 	</div>
 </div>
 
