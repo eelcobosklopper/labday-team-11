@@ -48,7 +48,7 @@
 </ul>
 
 <Button click={toggleMe} text="Click me" />
-<Button click={startTimer()} text="Start timer" />
+<Button click={startTimer} text="Start timer" />
 
 {#if visible}
 	<p>Hello!</p>
