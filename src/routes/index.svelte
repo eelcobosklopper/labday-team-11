@@ -87,10 +87,12 @@
 			</li>
 		{/each}
 	</ul>
-	<Button click={startTimer} text="Start timer" />
 </div>
 
 <style>
+	.container h1 {
+		margin-top: 50px;
+	}
 	.margin-top-0 {
 		margin-top: 0;
 	}
@@ -136,8 +138,9 @@
 		width: 300px;
 		margin: 50px;
 		text-align: center;
-		background: rgb(241, 241, 241);
+		background: rgb(78, 76, 76);
 		border-radius: 10px;
+		color: white;
 	}
 	li:hover {
 		filter: drop-shadow(0 0 0.5rem #ffaf37);
@@ -146,12 +149,11 @@
 		display: flex;
 		flex-direction: column;
 		align-items: center;
-		border-radius: 10px;
 		background-color: aliceblue;
 		height: 100vh;
 	}
 	a {
-		color: black;
+		color: white;
 		text-decoration: none;
 	}
 
