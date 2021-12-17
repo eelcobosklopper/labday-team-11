@@ -1,5 +1,7 @@
 <script>
 	import SpeechButton from './speech-button.svelte';
+	import { AudioPlayer } from '../effects/audio/AudioPlayer';
+	import { onMount } from 'svelte';
 
 	export let question = {
 		imgSrc: '/tree.png',
@@ -7,13 +9,30 @@
 		correct: 'Boom'
 	};
 
+	let player;
+	let SUCCESS_SOUND;
+	let FAILURE_SOUND;
+	onMount(async () => {
+		player = new AudioPlayer();
+		player.init();
+		SUCCESS_SOUND = await player.load('success', 'assets/fx-samples/winning-a-coin.wav');
+		FAILURE_SOUND = await player.load('failure', 'assets/fx-samples/pop.mp3');
+	});
+
+	const onClickFactory = (index) => (event) => {
+		if (question.answers[index] === question.correct) {
+			player.play(SUCCESS_SOUND);
+		} else {
+			player.play(FAILURE_SOUND);
+		}
+	};
 	function checkSpeech(ev) {
 		const res = ev.detail.text;
 		console.log(res);
-		if(res.toLowerCase() === question.correct.toLowerCase()) {
-			alert(res + ' is goed!')
-		}else {
-			alert(res + ' is fout!')
+		if (res.toLowerCase() === question.correct.toLowerCase()) {
+			alert(res + ' is goed!');
+		} else {
+			alert(res + ' is fout!');
 		}
 	}
 </script>
@@ -25,7 +44,9 @@
 
 	<div class="q-card__answers">
 		{#each question.answers as answer, i}
-			<button class="q-card__answer q-card__answer--{i}">{answer}</button>
+			<button class="q-card__answer q-card__answer--{i}" on:click={onClickFactory(i)}
+				>{answer}</button
+			>
 		{/each}
 	</div>
 
