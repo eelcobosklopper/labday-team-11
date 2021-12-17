@@ -24,7 +24,13 @@
 
     .q-card__question {
         width: 75vw;
-        max-width: 512px;
+        max-width: 256px;
+
+        background: hsl(230, 90%, 95%);
+        border: 6px solid hsl(230, 100%, 20%);
+        border-radius: 50%;
+
+        overflow: hidden;
     }
 
     .q-card__question img {
@@ -68,7 +74,7 @@
         box-shadow: inset 1px 2px 1px 3px var(--card-shadow-color);
     }
 
-    .q-card__answer:hover {
+    .q-card__answer:hover, .q-card__answer:focus {
         transform: scale(1.1);
     }
 
