@@ -3,11 +3,10 @@
 	import Button from '../components/button.svelte';
 	let visible = false;
 
-	const hello = 'asdfasdf';
-	const cats = [
-		{ id: 'J---aiyznGQ', name: 'Keyboard Cat' },
-		{ id: 'z_AbfPXTKms', name: 'Maru' },
-		{ id: 'OUtn3pvWmpg', name: 'Henri The Existential Cat' }
+	const lessons = [
+		{ id: 'J---aiyznGQ', name: 'Les 1' },
+		{ id: 'z_AbfPXTKms', name: 'Les 2' },
+		{ id: 'OUtn3pvWmpg', name: 'Les 3' }
 	];
 
 	function toggleMe() {
@@ -27,20 +26,18 @@
 	<title>Homepage</title>
 </svelte:head>
 
-<h1>Welcome to {hello}</h1>
-<p class="green">
-	Visit <a href="https://kit.svelte.dev">kit.svelte.dev</a> to read the documentation
-</p>
-
-<ul>
-	{#each cats as cat}
-		<li>
-			<a target="_blank" href="https://www.youtube.com/watch?v={cat.id}">
-				{cat.name}
-			</a>
-		</li>
-	{/each}
-</ul>
+<div class="container">
+	<h1>Welcome to The Accessible Dutch Course</h1>
+	<ul>
+		{#each lessons as lesson}
+			<li>
+				<a target="_blank" href="https://www.youtube.com/watch?v={lesson.id}">
+					{lesson.name}
+				</a>
+			</li>
+		{/each}
+	</ul>
+</div>
 
 <Button click={toggleMe} text="Click me" />
 <Button click={startTimer(3000, 3, showMessage, finished)} text="Start timer" />
@@ -55,7 +52,27 @@
 		font-family: 'Comic Sans MS', cursive;
 		font-size: 2em;
 	}
-	.green {
-		color: green;
+	li {
+		list-style: none;
+		font-size: 24px;
+		width: 300px;
+		margin: 20px;
+		text-align: center;
+		background: rgb(241, 241, 241);
+		border-radius: 10px;
+	}
+	li:hover {
+		filter: drop-shadow(0 0 0.5rem #ffaf37);
+	}
+	.container {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		border-radius: 10px;
+		background-color: aliceblue;
+	}
+	a {
+		color: black;
+		text-decoration: none;
 	}
 </style>
