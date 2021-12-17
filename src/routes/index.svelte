@@ -1,5 +1,6 @@
 <script>
 	import Button from '../components/button.svelte';
+	import QuestionCard from '../components/question-card.svelte';
 	let visible = false;
 
 	const cats = [
@@ -13,29 +14,24 @@
 	}
 </script>
 
-<h1>Welcome to SvelteKit</h1>
-<p>Visit <a href="https://kit.svelte.dev">kit.svelte.dev</a> to read the documentation</p>
-
-<ul>
-	{#each cats as cat}
-		<li>
-			<a target="_blank" href="https://www.youtube.com/watch?v={cat.id}">
-				{cat.name}
-			</a>
-		</li>
-	{/each}
-</ul>
-
-<Button click={toggleMe} text="Click me" />
-
-{#if visible}
-	<p>Hello!</p>
-{/if}
-
 <style>
-	p {
-		color: purple;
-		font-family: 'Comic Sans MS', cursive;
-		font-size: 2em;
-	}
+	:global(#svelte) {
+		position: absolute;
+		top: 0;
+		left: 0;
+
+		width: 100%;
+		height: 100%;
+		overflow: hidden;
+
+		background: hsl(0, 0%, 95%);
+
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}	
 </style>
+
+<div class="app">
+	<QuestionCard class="quiz__card"></QuestionCard>
+</div>
