@@ -15,7 +15,7 @@ export class AudioPlayer {
         this._initialized = true;
     }
 
-    async load(key, url) {
+    async load(key = Symbol('fx:key'), url) {
         if (!this._initialized) { throw new Error('AudioPlayer not initialized.'); };
         
         return new Promise((resolve) => {
@@ -28,6 +28,7 @@ export class AudioPlayer {
                     request.response, 
                     (buffer) => {
                         this._buffers.set(key, buffer);
+                        console.log(`Loaded audio buffer on "${key}".`, buffer);
                         resolve(key);
                     });
             };
@@ -38,7 +39,11 @@ export class AudioPlayer {
     async play(key) {
         if (!this._initialized) { throw new Error('AudioPlayer not initialized!'); };
 
-        this._fxSource.buffer = this._buffers.get(key);
-        this._fxSource.start(0);
+        if (this._buffers.has(key)) {
+            this._fxSource.buffer = this._buffers.get(key);
+            this._fxSource.start(0);
+        } else {
+            console.warn(`No audio buffer loaded with key "${key}".`);
+        }
     }
 }
