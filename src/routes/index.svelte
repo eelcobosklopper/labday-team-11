@@ -81,23 +81,16 @@
 	<ul>
 		{#each lessons as lesson}
 			<li>
-				<a target="_blank" href="https://www.youtube.com/watch?v={lesson.id}">
+				<a href="les1">
 					{lesson.name}
 				</a>
 			</li>
 		{/each}
 	</ul>
+	<Button click={startTimer} text="Start timer" />
 </div>
-<Button click={startTimer} text="Start timer" />
 
 <style>
-	body {
-		font-size: 16px;
-		color: black;
-		line-height: 1.5;
-		font-family: 'Open Sans';
-	}
-
 	.margin-top-0 {
 		margin-top: 0;
 	}
@@ -139,9 +132,9 @@
 	}
 	li {
 		list-style: none;
-		font-size: 24px;
+		font-size: 48px;
 		width: 300px;
-		margin: 20px;
+		margin: 50px;
 		text-align: center;
 		background: rgb(241, 241, 241);
 		border-radius: 10px;
@@ -155,6 +148,7 @@
 		align-items: center;
 		border-radius: 10px;
 		background-color: aliceblue;
+		height: 100vh;
 	}
 	a {
 		color: black;
