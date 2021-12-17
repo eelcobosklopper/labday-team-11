@@ -1,5 +1,5 @@
 <script>
-	let question = {
+	export let question = {
 		imgSrc: '/tree.png',
 		answers: ['Boom', 'Maan', 'Roos', 'Vis'],
 		correct: 'Boom'
