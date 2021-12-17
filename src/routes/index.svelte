@@ -1,100 +1,34 @@
 <script>
-import { onMount } from 'svelte';
-
-	import Button from '../components/button.svelte';
-	let visible = false;
-
-	const cats = [
-		{ id: 'J---aiyznGQ', name: 'Keyboard Cat' },
-		{ id: 'z_AbfPXTKms', name: 'Maru' },
-		{ id: 'OUtn3pvWmpg', name: 'Henri The Existential Cat' }
-	];
-
-	function toggleMe() {
-		visible = !visible;
-	}
-
-	let showFirst = false;
-	let showThreeOnARow = false;
-	let showGraduation = false;
-
-	onMount(() => {
-		window.addEventListener('keydown', function (e) {
-		if (e.key === 'Escape') {
-			showFirst = false;
-			showThreeOnARow = false;
-			showGraduation= false;
-		}
-	})
-})
-
+	const achievements = [
+		{id: 1, name: 'first', title: 'Goed gedaan!', subTitle: 'Uitdager!', body: 'Je hebt je eerste woord geleerd!', show: false},
+		{id: 2, name: 'threeOnARow', title: 'Goed bezig!', subTitle: 'Wildfire!', body: '3 op een rij!', show: false},
+		{id: 3, name: 'graduation', title: 'Blijf zo doorgaan!', subTitle: 'Progressie!', body: 'Je bent een snelle leerling!', show: false},
+	]
 </script>
 
-<h1>Welcome to SvelteKit</h1>
-<p>Visit <a href="https://kit.svelte.dev">kit.svelte.dev</a> to read the documentation</p>
+{#each achievements as achievement}
+	<button class="btn btn-default" on:click="{() => achievement.show = !achievement.show}">{achievement.id}</button>
 
-<ul>
-	{#each cats as cat}
-		<li>
-			<a target="_blank" href="https://www.youtube.com/watch?v={cat.id}">
-				{cat.name}
-			</a>
-		</li>
-	{/each}
-</ul>
-
-<Button click={toggleMe} text="Click me" />
-
-{#if visible}
-	<p>Hello!</p>
-{/if}
-
-<button on:click="{() => showFirst = !showFirst}">First</button>
-<button on:click="{() => showThreeOnARow = !showThreeOnARow}">3 in  row</button>
-<button on:click="{() => showGraduation = !showGraduation}">Graduation</button>
-
-<div class="overlay" class:show="{showFirst}" on:click="{() => showFirst = false}">
+	<div class="overlay" class:show="{achievement.show}" on:click="{() => achievement.show = false}">
 	<div class="pop-up">
 		<div class="margin-bottom-32">
-			<h2>Goed gedaan!</h2>
-			<img class="img-fluid margin-bottom-32" src="assets/first.png" alt="First">
-			<h3 class="subtitle margin-bottom-8">Uitdager</h3>
-			<p class="margin-top-0">Je hebt je eerste woord geleerd!</p>
+			<h2>{achievement.title}</h2>
+			<img class="img-fluid margin-bottom-32" src="assets/{achievement.name}.png" alt="{achievement.title}">
+			<h3 class="subtitle margin-bottom-8">{achievement.subTitle}</h3>
+			<p class="margin-top-0">{achievement.body}</p>
 		</div>
-		<button class="btn btn-primary" on:click="{() => showFirst = false}">Sluiten</button>
+		<button class="btn btn-primary d-block w100"  on:click="{() => achievement.show = false}">Sluiten</button>
 	</div>
 </div>
-
-<div class="overlay" class:show="{showThreeOnARow}" on:click="{() => showThreeOnARow = false}">
-	<div class="pop-up">
-		<div class="margin-bottom-32">
-			<h2>Goed bezig!</h2>
-			<img class="img-fluid margin-bottom-32" src="assets/employee.png" alt="First">
-			<h3 class="subtitle margin-bottom-8">Wildfire</h3>
-			<p class="margin-top-0">3 op een rij!</p>
-		</div>
-		<button class="btn btn-primary" on:click="{() => showThreeOnARow = false}">Sluiten</button>
-	</div>
-</div>
-
-<div class="overlay" class:show="{showGraduation}" on:click="{() => showGraduation = false}">
-	<div class="pop-up">
-		<div class="margin-bottom-32">
-			<h2>Blijf zo doorgaan!</h2>
-			<img class="img-fluid margin-bottom-32" src="assets/graduation.png" alt="First">
-			<h3 class="subtitle margin-bottom-8">Progressie</h3>
-			<p class="margin-top-0">Je bent een snelle leerling!</p>
-		</div>
-		<button class="btn btn-primary" on:click="{() => showGraduation = false}">Sluiten</button>
-	</div>
-</div>
+{/each}
 
 
 <style>
-	p {
-		color: purple;
-		font-family: 'Comic Sans MS', cursive;
-		font-size: 2em;
+	body {
+		font-size: 16px;
+		color: black;
+		line-height: 1.5;
+		font-family: 'Open Sans';
 	}
 
 	.margin-top-0 {
@@ -138,16 +72,32 @@ import { onMount } from 'svelte';
 		text-align: center;
 	}
 
-	.btn {
+	.d-block {
 		display: block;
+	}
+
+	.w100 {
+		width: 100%;
+	}
+
+	.btn {
+		appearance: none;
 		border-radius: 18px;
 		padding: 8px 16px;
-		width: 100%;
-		background-color: #38AEFF;
 		border: none;
-		color: white;
 		cursor: pointer;
 		text-transform: uppercase;
+		font-size: 16px;
+		line-height: 1.5;
+	}
+
+	.btn-default {
+		border-radius: 4px;
+	}
+
+	.btn-primary {
+		background-color: #38AEFF;
+		color: white;
 	}
 
 	.img-fluid {
