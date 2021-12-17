@@ -24,7 +24,7 @@ export class AudioPlayer {
                     request.response, 
                     (buffer) => {
                         this._buffers.set(key, buffer);
-                        resolve(this._buffers.get(key));
+                        resolve(key);
                     });
             };
             request.send();
