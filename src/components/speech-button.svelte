@@ -66,6 +66,7 @@
 
 <style>
 	.microphone-button {
+		margin: 8px auto;
 		width: 64px;
 		height: 64px;
 		display: flex;
