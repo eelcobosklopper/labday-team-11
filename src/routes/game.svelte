@@ -1,7 +1,7 @@
 <script>
-	import MultipleChoice from '../components/multiple_choice.svelte';
+	import QuestionCard from '../components/question-card.svelte';
+	import PomodoroMessage from '../components/pomodoroMessage.svelte';
 </script>
 
-<MultipleChoice />
-
-
+<QuestionCard />
+<PomodoroMessage />

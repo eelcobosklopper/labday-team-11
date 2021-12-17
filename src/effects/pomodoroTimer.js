@@ -1,15 +1,17 @@
-export default async function startTimer(time, numberOfBreaks, showMessage, finished) {
-	let pomodoroTimer = 0;
-	while (pomodoroTimer < numberOfBreaks) {
-		await timeout(time);
-		console.log('tick');
-		showMessage();
-		pomodoroTimer++;
-	}
-	finished();
-	console.log('done!');
-}
+// import { AudioPlayer } from './audio/AudioPlayer';
 
-function timeout(ms) {
-	return new Promise((resolve) => setTimeout(resolve, ms));
+export default async function pomodoroTimer(time, numberOfBreaks, showMessage) {
+	// const audio = new AudioPlayer();
+	// audio.init();
+	// audio.load('pop', 'assets/fx-samples/pop.mp3');
+	let currentNumberOfBreaks = 0;
+	while (currentNumberOfBreaks < numberOfBreaks) {
+		await new Promise((resolve) => setTimeout(resolve, time));
+		console.log('tick');
+		// audio.play('pop');
+		showMessage();
+		currentNumberOfBreaks++;
+	}
+	console.log('done!');
+	return;
 }
