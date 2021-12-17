@@ -8,10 +8,6 @@ export class AudioPlayer {
 
         this._buffers = new Map();
         this._context = new AudioContext();
-
-        this._fxSource = this._context.createBufferSource();
-        this._fxSource.connect(this._context.destination);
-
         this._initialized = true;
     }
 
@@ -40,8 +36,10 @@ export class AudioPlayer {
         if (!this._initialized) { throw new Error('AudioPlayer not initialized!'); };
 
         if (this._buffers.has(key)) {
-            this._fxSource.buffer = this._buffers.get(key);
-            this._fxSource.start(0);
+            const fxSource = this._context.createBufferSource();
+            fxSource.buffer = this._buffers.get(key);
+            fxSource.connect(this._context.destination);
+            fxSource.start(0);
         } else {
             console.warn(`No audio buffer loaded with key "${key}".`);
         }

@@ -1,5 +1,4 @@
 <script>
-	import Button from './button.svelte';
 	import { AudioPlayer } from '../effects/audio/AudioPlayer';
 	import { onMount } from 'svelte';
 
@@ -10,26 +9,27 @@
 	};
 
 	let result = false;
-	let audio = new AudioPlayer();
-
-	onMount(() => {
-		audio.init();
+	let player;
+	let SUCCESS_SOUND;
+	let FAILURE_SOUND;
+	onMount(async () => {
+		player = new AudioPlayer();
+		player.init();
+		SUCCESS_SOUND = await player.load('success', 'assets/fx-samples/winning-a-coin.wav');
+		FAILURE_SOUND = await player.load('failure', 'assets/fx-samples/losing-a-coin.wav');
 	});
 
-	// vergelijk button-word met {word.correct_word}
-	function compareWords() {
-		audio.load('correct', 'assets/fx-samples/winning-a-coin.wav');
-		audio.load('incorrect', 'assets/fx-samples/losing-a-coin.wav');
-		if (question.correct == event.target.textContent) {
+	const onClickFactory = (index) => (event) => {
+		if (question.answers[index] === question.correct) {
 			result = true;
-			console.log('correct!');
-			audio.play('correct');
+
+			player.play(SUCCESS_SOUND);
 		} else {
 			result = false;
-			console.log('incorrect!');
-			audio.play('incorrect');
+
+			player.play(FAILURE_SOUND);
 		}
-	}
+	};
 </script>
 
 <section class="q-card">
@@ -39,7 +39,9 @@
 
 	<div class="q-card__answers">
 		{#each question.answers as answer, i}
-			<button class="q-card__answer q-card__answer--{i}" on:click={compareWords}>{answer}</button>
+			<button class="q-card__answer q-card__answer--{i}" on:click={onClickFactory(i)}
+				>{answer}</button
+			>
 		{/each}
 	</div>
 	{#if result}
