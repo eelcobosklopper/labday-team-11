@@ -1,9 +1,9 @@
 <script>
-	import Button from './button.svelte';
 	import Microphone from 'svelte-material-icons/Microphone.svelte';
 	import { createEventDispatcher, onMount } from 'svelte';
 
 	let recognition;
+	let seconds = 4;
 
 	onMount(() => {
 		if ('webkitSpeechRecognition' in window) {
@@ -23,6 +23,7 @@
 			};
 
 			recognition.onend = () => {
+				seconds = 0;
 				active = false;
 				dispatch('stop');
 			};
@@ -33,6 +34,15 @@
 		} else {
 			console.warn('Speech recognition not available');
 		}
+
+		const interval = setInterval(() => {
+			console.log(seconds);
+			seconds = seconds - 1;
+			if (seconds === 0) {
+				toggleSpeech();
+				clearInterval(interval);
+			}
+		}, 1000);
 	});
 
 	const dispatch = createEventDispatcher();
@@ -48,6 +58,11 @@
 		<Microphone size="100%" color={active ? '#111' : '#aaa'} />
 	</span>
 </div>
+{#if seconds > 0}
+<div class="countdown">
+	<span>Spraak wordt actief in {seconds}</span>
+</div>
+{/if}
 
 <style>
 	.microphone-button {
@@ -69,18 +84,18 @@
 
 	.active .icon-wrapper {
 		transform: scale(1);
-		animation: pulse 2s infinite;
+		animation: pulse 1.5s infinite;
 	}
 
 	@keyframes pulse {
 		0% {
-			transform: scale(0.90);
+			transform: scale(0.9);
 		}
 		50% {
 			transform: scale(1.1);
 		}
 		100% {
-			transform: scale(0.90);
+			transform: scale(0.9);
 		}
 	}
 </style>
