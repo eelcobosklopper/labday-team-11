@@ -1,7 +1,4 @@
 <script>
-	import pomodoroTimer from '../effects/pomodoroTimer';
-	import Button from '../components/button.svelte';
-
 	const lessons = [
 		{ id: 'J---aiyznGQ', name: 'Les 1' },
 		{ id: 'z_AbfPXTKms', name: 'Les 2' },
@@ -33,19 +30,6 @@
 			show: false
 		}
 	];
-
-	async function startTimer() {
-		await pomodoroTimer(3000, 3, showMessage);
-		finished();
-	}
-
-	function showMessage() {
-		console.log('take a break!');
-	}
-
-	function finished() {
-		console.log('finished!');
-	}
 </script>
 
 {#each achievements as achievement}
@@ -88,16 +72,8 @@
 		{/each}
 	</ul>
 </div>
-<Button click={startTimer} text="Start timer" />
 
 <style>
-	body {
-		font-size: 16px;
-		color: black;
-		line-height: 1.5;
-		font-family: 'Open Sans';
-	}
-
 	.margin-top-0 {
 		margin-top: 0;
 	}
