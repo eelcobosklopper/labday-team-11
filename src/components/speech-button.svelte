@@ -42,4 +42,4 @@
 	}
 </script>
 
-<Button click={toggleSpeech} text={active ? 'Stop' : 'Start'} />
+<Button click={toggleSpeech} text={active ? 'Stop' : 'Start met luisteren'} />
