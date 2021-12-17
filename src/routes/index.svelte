@@ -194,7 +194,3 @@
 		height: auto;
 	}
 </style>
-
-<div class="app">
-	<QuestionCard class="quiz__card"></QuestionCard>
-</div>
