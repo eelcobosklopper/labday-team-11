@@ -1,22 +1,32 @@
 <script>
+    import { AudioPlayer } from "../effects/audio/AudioPlayer";
+    import { onMount } from "svelte";
+
+
 	export let question = {
 		imgSrc: '/tree.png',
 		answers: ['Boom', 'Maan', 'Roos', 'Vis'],
 		correct: 'Boom'
 	};
+
+    let player;
+    let SUCCESS_SOUND;
+    let FAILURE_SOUND;
+    onMount(async () => {
+        player = new AudioPlayer();
+        player.init();
+        SUCCESS_SOUND = await player.load('success', 'assets/fx-samples/winning-a-coin.wav');
+        FAILURE_SOUND = await player.load('failure', 'assets/fx-samples/pop.mp3');
+    });
+
+    const onClickFactory = (index) => (event) => {
+        if (question.answers[index] === question.correct) {
+            player.play(SUCCESS_SOUND);
+        } else {
+            player.play(FAILURE_SOUND);
+        }
+    };
 </script>
-
-<section class="q-card">
-	<div class="q-card__question">
-		<img src={question.imgSrc} alt="What do you see?" />
-	</div>
-
-	<div class="q-card__answers">
-		{#each question.answers as answer, i}
-			<button class="q-card__answer q-card__answer--{i}">{answer}</button>
-		{/each}
-	</div>
-</section>
 
 <style>
     .q-card {
@@ -118,3 +128,15 @@
         --card-shadow-color: hsl(300, 100%, 30%);
     }
 </style>
+
+<section class="q-card">
+	<div class="q-card__question">
+		<img src={question.imgSrc} alt="What do you see?" />
+	</div>
+
+	<div class="q-card__answers">
+		{#each question.answers as answer, i}
+			<button class="q-card__answer q-card__answer--{i}" on:click={onClickFactory(i)}>{answer}</button>
+		{/each}
+	</div>
+</section>
