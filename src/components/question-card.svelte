@@ -16,7 +16,7 @@
         player = new AudioPlayer();
         player.init();
         SUCCESS_SOUND = await player.load('success', 'assets/fx-samples/winning-a-coin.wav');
-        FAILURE_SOUND = await player.load('failure', 'assets/fx-samples/pop.mp3');
+        FAILURE_SOUND = await player.load('failure', 'assets/fx-samples/losing-a-coin.wav');
     });
 
     const onClickFactory = (index) => (event) => {
