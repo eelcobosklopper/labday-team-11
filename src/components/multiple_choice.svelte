@@ -1,5 +1,7 @@
 <script>
 	import Button from './button.svelte';
+	import { AudioPlayer } from '../effects/audio/AudioPlayer';
+    import { onMount } from 'svelte';
 
 	let word = {
 		image: 'static/bos.png',
@@ -7,11 +9,25 @@
 		options: ['bloem', 'bos', 'hout', 'bieslook']
 	};
 	let result = false;
+	let audio = new AudioPlayer();
+
+    onMount(() => {
+         audio.init();
+    });
+
 
 	// vergelijk button-word met {word.correct_word}
 	function compareWords() {
-		word.correct_word == event.target.textContent ? (result = true) : (result = false);
-		// console.log(result);
+
+		audio.load('correct', 'assets/fx-samples/winning-a-coin.wav');
+		audio.load('incorrect', 'assets/fx-samples/losing-a-coin.wav');
+		if (word.correct_word == event.target.textContent) {
+			result = true;
+			audio.play('correct');
+		} else {
+			result = false;
+			audio.play('incorrect');
+		}
 	}
 </script>
 
